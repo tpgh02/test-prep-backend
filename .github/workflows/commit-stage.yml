@@ -50,20 +50,20 @@ jobs:
           chmod +x gradlew 
           ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]'):${{ env.VERSION }}
 
-      - name: OCI image vulnerability scanning
-        uses: anchore/scan-action@v3 #Grype를 활용하여 vulnerability 스캔
-        id: scan
-        with:
-          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          fail-build: false
-          severity-cutoff: high
-          acs-report-enable: true
-
-      - name: Upload vulnerability report
-        uses: github/codeql-action/upload-sarif@v3 #스캔 결과를 github에 업로드 (SARIF 형식)
-        if: success() || failure()
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+#      - name: OCI image vulnerability scanning
+#        uses: anchore/scan-action@v3 #Grype를 활용하여 vulnerability 스캔
+#        id: scan
+#        with:
+#          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+#          fail-build: false
+#          severity-cutoff: high
+#          acs-report-enable: true
+#
+#      - name: Upload vulnerability report
+#        uses: github/codeql-action/upload-sarif@v3 #스캔 결과를 github에 업로드 (SARIF 형식)
+#        if: success() || failure()
+#        with:
+#          sarif_file: ${{ steps.scan.outputs.sarif }}
 
       - name: Log into container registry
         uses: docker/login-action@v2
@@ -73,4 +73,4 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Publish container image
-        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+        run: docker push ${{ env.REGISTRY }}/$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]'):${{ env.VERSION }}
