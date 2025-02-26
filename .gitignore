@@ -60,3 +60,5 @@ application-dev.properties
 # OS specific
 .DS_Store
 Thumbs.db
+
+application.properties
