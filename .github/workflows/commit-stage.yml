@@ -4,7 +4,7 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: Test-Prep-AI/Backend
-  VERSION: 1.2
+  VERSION: 1.0.0
 jobs:
   build:
     if: github.repository_owner == 'Test-Prep-AI'
@@ -48,7 +48,7 @@ jobs:
       - name: Build container image
         run: |
           chmod +x gradlew 
-          ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          ./gradlew bootBuildImage --imageName ${{ env.REGISTRY }}/$(echo ${{ env.IMAGE_NAME }} | tr '[:upper:]' '[:lower:]'):${{ env.VERSION }}
 
       - name: OCI image vulnerability scanning
         uses: anchore/scan-action@v3 #Grype를 활용하여 vulnerability 스캔
