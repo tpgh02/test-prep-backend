@@ -1,0 +1,17 @@
+server:
+  port: 9001
+  #graceful shutdown
+  shutdown: graceful
+  tomcat:
+    connection-timeout: 3s
+    keep-alive-timeout: 15s
+    threads:
+      max: 50
+      min-spare: 5
+
+spring:
+  application:
+    name: backend
+  lifecycle:
+    #grace period 15?
+    timeout-per-shutdown-phase: 15s
