@@ -10,10 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// TODO
-// 일단은 /auth를 달아서 유저 정보 없이도 다운로드할 수 있도록 함
 @RestController
-@RequestMapping("/auth/problems")
+@RequestMapping("/problems")
 @RequiredArgsConstructor
 public class PdfTestController {
 
