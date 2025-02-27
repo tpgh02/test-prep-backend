@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FastApiResponse {
-    private List<ProblemType> questions;
+    private List<ProblemType> questions_set;
     private List<Integer> referencedPages;
     private String topic;
 }

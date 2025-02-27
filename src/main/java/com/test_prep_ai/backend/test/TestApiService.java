@@ -33,9 +33,9 @@ public class TestApiService {
         ProjectEntity project = projectService.createProjectEntity(member.getUsername() + "의 프로젝트", member);
 
         // 응답 dto로 문제 엔터티 생성
-        problemService.createProblemEntity(apiResponse.getQuestions(), project);
+        problemService.createProblemEntity(apiResponse.getQuestions_set(), project);
 
-        System.out.println(apiResponse.getQuestions());
+        System.out.println(apiResponse.getQuestions_set());
 
         return project.getId();
     }

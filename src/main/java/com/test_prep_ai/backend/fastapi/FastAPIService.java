@@ -50,7 +50,7 @@ public class FastAPIService {
         ProjectEntity project = projectService.createProjectEntity(apiResponse.getTopic(), member);
 
         // 응답 dto로 문제 엔터티 생성
-        problemService.createProblemEntity(apiResponse.getQuestions(), project);
+        problemService.createProblemEntity(apiResponse.getQuestions_set(), project);
 
         System.out.println(response.getBody());
 
