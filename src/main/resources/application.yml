@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 8080
   #graceful shutdown
   shutdown: graceful
   tomcat:
@@ -15,3 +15,31 @@ spring:
   lifecycle:
     #grace period 15?
     timeout-per-shutdown-phase: 15s
+  datasource:
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+    url: jdbc:postgresql://db-testprep.cluster-c160osi2k7qo.ap-northeast-2.rds.amazonaws.com:5432/postgres
+    hikari:
+      connection-timeout: 2000
+      maximum-pool-size: 5
+      idle-timeout: 600000
+      max-lifetime: 1800000
+  jwt:
+    secret: ${JWT_SECRET}
+  jpa:
+    hibernate:
+      ddl-auto: create
+AWS:
+  ACCESS:
+    KEY:
+      ID: ${AWS_ACCESS_KEY}
+  SECRET:
+    ACCESS:
+      KEY: ${AWS_SECRET_KEY}
+  REGION: ap-northeast-2
+
+S3:
+  BUCKET:
+    NAME: ${S3_BUCKET_NAME}
+
+
