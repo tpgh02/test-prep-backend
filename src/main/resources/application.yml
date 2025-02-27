@@ -18,7 +18,7 @@ spring:
   datasource:
     username: ${RDS_USERNAME}
     password: ${RDS_PASSWORD}
-    url: jdbc:postgresql://${RDS_HOSTNAME}:${RDS_PORT}/${RDS_DB_NAME}
+    url: jdbc:postgresql://db-testprep.cluster-c160osi2k7qo.ap-northeast-2.rds.amazonaws.com:5432/postgres
     hikari:
       connection-timeout: 2000
       maximum-pool-size: 5
