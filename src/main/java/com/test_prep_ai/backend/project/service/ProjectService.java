@@ -11,7 +11,9 @@ import com.test_prep_ai.backend.security.Session;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,21 +41,12 @@ public class ProjectService {
                 .build();
     }
 
-    private List<ProjectList> getProjectList(Session session) {
+    public List<ProjectList> getProjectList(Session session) {
         MemberEntity member = memberRepository.findById(session.getId()).orElseThrow(() -> new NotFoundException("Member not found"));
 
-        return  member.getProjects().stream()
-                .map(project -> ProjectList.builder()
-                        .projectId(project.getId())
-                        .projectName(project.getName())
-                        .build())
-                .collect(Collectors.toList());
-    }
-
-    public List<ProjectList> getProjectList(long id) {
-        MemberEntity member = memberRepository.findById(id).orElseThrow(() -> new NotFoundException("Member not found"));
-
-        return  member.getProjects().stream()
+        return Optional.ofNullable(member.getProjects())
+                .orElse(Collections.emptyList())  // null일 경우 빈 리스트 반환
+                .stream()
                 .map(project -> ProjectList.builder()
                         .projectId(project.getId())
                         .projectName(project.getName())
