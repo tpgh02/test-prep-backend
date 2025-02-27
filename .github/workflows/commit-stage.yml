@@ -4,7 +4,7 @@ on: push
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: Test-Prep-AI/Backend
-  VERSION: 1.2.0
+  VERSION: 1.2.4
 jobs:
   build:
     if: github.repository_owner == 'Test-Prep-AI'
