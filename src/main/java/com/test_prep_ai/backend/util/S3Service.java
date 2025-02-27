@@ -26,7 +26,7 @@ public class S3Service {
     private final AmazonS3 s3Client;
 
     // 허용된 파일 확장자 목록
-    private static final Set<String> ALLOWED_EXTENSIONS = Set.of("jpg", "jpeg", "png", "pdf");
+    private static final Set<String> ALLOWED_EXTENSIONS = Set.of("pdf");
 
     /**
      * 단일 파일 업로드 메서드

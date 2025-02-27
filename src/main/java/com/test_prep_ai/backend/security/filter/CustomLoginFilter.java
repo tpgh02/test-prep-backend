@@ -2,10 +2,11 @@ package com.test_prep_ai.backend.security.filter;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.test_prep_ai.backend.response.DataResponse;
 import com.test_prep_ai.backend.security.JwtUtil;
 import com.test_prep_ai.backend.security.dto.CustomUserDetails;
 import com.test_prep_ai.backend.security.dto.TokenResponse;
-import com.test_prep_ai.backend.response.DataResponse;
+import com.test_prep_ai.backend.security.dto.UserResponse;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -41,7 +43,7 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
             return null;
         }
 
-        username = requestBody.get("username");
+        username = requestBody.get("useremail");
         password = requestBody.get("password");
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
@@ -67,14 +69,19 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 
         // 주체(principal)란. 일반적으로 사용자 이름이나 사용자 정보를 나타내는 객체
         Long id = customUserDetails.getId();
-        String username = customUserDetails.getUsername();
+        String useremail = customUserDetails.getUsername();
+        String username = customUserDetails.getNickname();
+
+        //TODO
+        ArrayList<Object> projectList = new ArrayList<>();
 
         // token 만들기
-        String token = jwtUtil.generateToken(id, username);
+        String token = jwtUtil.generateToken(id, useremail);
 
         // 응답 구성하기 (헤더, 바디)
         TokenResponse tokenDto = new TokenResponse(token);
-        DataResponse<TokenResponse> tokenBody = DataResponse.of(tokenDto);
+        UserResponse userResponse = new UserResponse(tokenDto, username, projectList);
+        DataResponse<UserResponse> tokenBody = DataResponse.of(userResponse);
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonResponse = objectMapper.writeValueAsString(tokenBody);
 

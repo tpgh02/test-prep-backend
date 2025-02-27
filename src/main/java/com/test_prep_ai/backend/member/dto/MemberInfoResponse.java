@@ -13,8 +13,8 @@ public class MemberInfoResponse {
 
     private Long id;
 
-    private String username;
+    private String useremail;
 
-    private String nickname;
+    private String username;
 
 }
