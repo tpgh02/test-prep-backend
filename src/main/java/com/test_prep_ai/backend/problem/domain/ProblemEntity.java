@@ -20,6 +20,7 @@ public class ProblemEntity {
     private String title;
     private String description;
     private String type;
+    private String answer;
 
     @ElementCollection
     private Map<String, String> options;
@@ -29,12 +30,13 @@ public class ProblemEntity {
     private ProjectEntity project;
 
     @Builder
-    public ProblemEntity(String title, String description, String type, Map<String, String> options, ProjectEntity project) {
+    public ProblemEntity(String title, String description, String type, Map<String, String> options, ProjectEntity project, String answer) {
         this.title = title;
         this.description = description;
         this.type = type;
         this.options = options;
         this.project = project;
+        this.answer = answer;
     }
 
 }
