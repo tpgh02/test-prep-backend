@@ -27,7 +27,7 @@ public class FastAPIService {
     private final ProjectService projectService;
     private final MemberRepository memberRepository;
     private final ProblemService problemService;
-    private String url = "http://ai.model.svc.cluster.local/problems";
+    private String url = "http://ai.model.svc.cluster.local/problems/input-pdf";
 
     public long connectWithAI(List<String> types, String level, String message, String fileName, Session session) throws JsonProcessingException {
         QuestionResponse questionResponse = questionService.createQuestionResponse(stringToIntegerList(types), level, message, fileName);
@@ -36,7 +36,6 @@ public class FastAPIService {
         RestTemplate restTemplate = new RestTemplate();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        url += "/input-pdf";
 
         // FastAPI에 요청보내기.
         HttpEntity<QuestionResponse> requestEntity = new HttpEntity<>(questionResponse, headers);
