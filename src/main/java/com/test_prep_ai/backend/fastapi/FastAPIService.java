@@ -27,7 +27,7 @@ public class FastAPIService {
     private final ProjectService projectService;
     private final MemberRepository memberRepository;
     private final ProblemService problemService;
-    private String url = "http://localhost:8000/problems";
+    private String url = "http://ai.ai.svc.cluster.local/problems";
 
     public long connectWithAI(List<String> types, String level, String message, String fileName, Session session) throws JsonProcessingException {
         QuestionResponse questionResponse = questionService.createQuestionResponse(stringToIntegerList(types), level, message, fileName);
