@@ -50,4 +50,15 @@ public class ProjectService {
                 .collect(Collectors.toList());
     }
 
+    public List<ProjectList> getProjectList(long id) {
+        MemberEntity member = memberRepository.findById(id).orElseThrow(() -> new NotFoundException("Member not found"));
+
+        return  member.getProjects().stream()
+                .map(project -> ProjectList.builder()
+                        .projectId(project.getId())
+                        .projectName(project.getName())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
 }
