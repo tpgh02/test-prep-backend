@@ -12,6 +12,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,11 +69,16 @@ public class ProblemService {
 
     public AnswerResponse isCorrectAnswer(long projectId, long problemId, String userAnswer){
         ProblemEntity problem = problemRepository.findById(problemId).orElseThrow(() -> new NotFoundException("not found problem"));
+        String problemAnswer = problem.getAnswer().trim();
         Boolean isCorrect = problem.getAnswer().equals(userAnswer);
 
-//        if (problem.getType().equals("단답형")) {
-//
-//        }
+        if (problem.getType().equals("단답형")) {
+            String[] answers = Arrays.stream(problemAnswer.split(","))
+                    .map(String::trim)
+                    .toArray(String[]::new);
+
+            isCorrect = Arrays.asList(answers).contains(userAnswer);
+        }
 
         return AnswerResponse.builder()
                 .projectId(projectId)

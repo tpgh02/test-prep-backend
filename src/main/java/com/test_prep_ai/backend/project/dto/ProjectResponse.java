@@ -12,7 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProjectResponse {
-
     private long currentProjectId;
     private List<ProjectList> projectList;
 }
