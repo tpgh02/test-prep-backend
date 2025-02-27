@@ -86,7 +86,7 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
     // 로그인 실패 시
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) {
-        setBody(response, 401, "로그인에 실패했습니다.");
+        setBody(response, 401, "login failed");
     }
 
     private void setBody(HttpServletResponse response, int code, String message) {
