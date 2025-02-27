@@ -41,7 +41,7 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
             return null;
         }
 
-        username = requestBody.get("username");
+        username = requestBody.get("useremail");
         password = requestBody.get("password");
 
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {

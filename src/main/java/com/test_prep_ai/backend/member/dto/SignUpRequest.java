@@ -12,9 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class SignUpRequest {
 
-    @NotEmpty(message = "Username is Required")
+    @NotEmpty(message = "Useremail is Required")
     // @Email(message = "Username is out form")  // username을 이메일로 쓸 거면 Email Validation 쓰기
-    private String username;
+    private String useremail;
 
     @NotEmpty(message = "password is Required")
     private String password1;
@@ -22,6 +22,6 @@ public class SignUpRequest {
     private String password2;
 
     @NotEmpty(message = "Nickname is Required")
-    private String nickname;
+    private String username;
 
 }

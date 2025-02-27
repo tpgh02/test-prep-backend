@@ -34,9 +34,9 @@ public class SignUpService {
 
         // entity로 변환
         MemberEntity memberEntity = MemberEntity.builder()
-                .username(data.getUsername())
+                .username(data.getUseremail())
                 .password(bCryptPasswordEncoder.encode(data.getPassword1()))
-                .nickname(data.getNickname())
+                .nickname(data.getUsername())
                 .build();
 
         // 저장
@@ -74,8 +74,8 @@ public class SignUpService {
     private MemberInfoResponse returnMemberInfo(MemberEntity memberEntity) {
         return MemberInfoResponse.builder()
                 .id(memberEntity.getId())
-                .username(memberEntity.getUsername())
-                .nickname(memberEntity.getNickname())
+                .useremail(memberEntity.getUsername())
+                .username(memberEntity.getNickname())
                 .build();
     }
 
