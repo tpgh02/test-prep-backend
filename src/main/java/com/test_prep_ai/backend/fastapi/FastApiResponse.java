@@ -15,4 +15,5 @@ import java.util.List;
 public class FastApiResponse {
     private List<ProblemType> questions;
     private List<Integer> referencedPages;
+    private String topic;
 }

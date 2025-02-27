@@ -47,7 +47,7 @@ public class FastAPIService {
         FastApiResponse apiResponse = objectMapper.readValue(response.getBody(), FastApiResponse.class);
 
         // 새 프로젝트 생성
-        ProjectEntity project = projectService.createProjectEntity(member.getUsername() + "의 프로젝트", member);
+        ProjectEntity project = projectService.createProjectEntity(apiResponse.getTopic(), member);
 
         // 응답 dto로 문제 엔터티 생성
         problemService.createProblemEntity(apiResponse.getQuestions(), project);
