@@ -38,7 +38,7 @@ public class FastAPIService {
         headers.setContentType(MediaType.APPLICATION_JSON);
         url += "/input-pdf";
 
-        // FastAPI에 요청보내기
+        // FastAPI에 요청보내기.
         HttpEntity<QuestionResponse> requestEntity = new HttpEntity<>(questionResponse, headers);
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
 
