@@ -1,7 +1,9 @@
 package com.test_prep_ai.backend.project.domain;
 
+import com.test_prep_ai.backend.member.domain.MemberEntity;
 import com.test_prep_ai.backend.problem.domain.ProblemEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -19,6 +21,16 @@ public class ProjectEntity {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProblemEntity> problems;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private MemberEntity member;
+
+    @Builder
+    public ProjectEntity(String name, MemberEntity member) {
+        this.name = name;
+        this.member = member;
+    }
 }

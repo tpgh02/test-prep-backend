@@ -1,10 +1,12 @@
 package com.test_prep_ai.backend.problem.domain;
 
+import com.test_prep_ai.backend.project.domain.ProjectEntity;
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter
@@ -15,15 +17,24 @@ public class ProblemEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
     private String title;
     private String description;
+    private String type;
 
     @ElementCollection
-    private List<String> choice;
+    private Map<String, String> options;
 
-    @Enumerated(EnumType.STRING)
-    private ProblemType type;
+    @ManyToOne
+    @JoinColumn(name = "project_id")
+    private ProjectEntity project;
 
-    private String level;
+    @Builder
+    public ProblemEntity(String title, String description, String type, Map<String, String> options, ProjectEntity project) {
+        this.title = title;
+        this.description = description;
+        this.type = type;
+        this.options = options;
+        this.project = project;
+    }
+
 }

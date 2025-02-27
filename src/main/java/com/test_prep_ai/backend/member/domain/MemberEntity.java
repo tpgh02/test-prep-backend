@@ -1,9 +1,12 @@
 package com.test_prep_ai.backend.member.domain;
 
+import com.test_prep_ai.backend.project.domain.ProjectEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +24,9 @@ public class MemberEntity {
     private String password;
 
     private String nickname;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProjectEntity> projects;
 
 
     @Builder
