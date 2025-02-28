@@ -1,2 +1,3 @@
 # Testprep_BE
-Backend repository for test-prep-ai
+25.02.26 - 25.02.28 카카오테크 부트캠프 주관 해커톤
+본선까지 올라간 Test Prep의 백엔드 코드
